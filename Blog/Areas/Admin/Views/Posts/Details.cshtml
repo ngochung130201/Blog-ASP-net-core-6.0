@@ -1,0 +1,56 @@
+﻿@model Blog.Models.Posts
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Chi tiết Bài viết</h4>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Tên Bài viết</th>
+                            <th>Avartar</th>
+                            <th>Chú thích ngắn</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>@Model.NamePost</td>
+                            <td>
+                                <img src="~/images//post/@Model.Avatar" />
+                            </td>
+                            <td>@Model.ContentSort</td>
+                            
+                        </tr>
+
+
+
+                    </tbody>
+                </table>
+                <div>
+                    <p>
+                        @Html.Raw(Model.Description)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <button class="btn btn-primary">
+        <a asp-action="Edit" asp-route-id="@Model?.CategoryId">Edit</a> |
+
+    </button>
+    <button class="btn btn-info">
+
+        <a asp-action="Index">Quay lại</a>
+    </button>
+</div>

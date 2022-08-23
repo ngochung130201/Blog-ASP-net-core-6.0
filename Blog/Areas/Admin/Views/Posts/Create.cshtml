@@ -1,0 +1,80 @@
+﻿@model Blog.Models.Posts
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section Styles{
+    <link href="~/Adminassets/summernote/summernote-bs4.css" rel="stylesheet" />
+    <link href="~/Adminassets/summernote/summernote.css" rel="stylesheet" />
+}
+
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Tạo mới bài viết</h4>
+                        <p class="card-description"> Bài viết </p>
+                        
+                            <div class="form-group">
+                                <label asp-for="NamePost">Tiêu đề</label>
+                                 <input asp-for="NamePost"  type="text" class="form-control" id="NamePost" placeholder="Tiêu đề">
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Avatar">Ảnh đại diện</label> <br />
+                                <input type="file" name="avatar" asp-for="Avatar" class="">
+                                
+                            </div>
+                            <div class="form-group">
+                            <label asp-for="ContentSort" class="control-label"></label>
+                        <input asp-for="ContentSort" type="text" class="form-control" id="ContentSort" placeholder="Chú thích ngắn">
+                            <span asp-validation-for="ContentSort" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description">Nội dung</label>
+                                 <textarea asp-for="Description" class="form-control Description" ></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CategoryId">Danh mục</label>
+                            <select class="js-example-basic-single" asp-for="CategoryId" asp-items="@ViewBag.DanhMuc" multiple="multiple" style="width:100%">
+                                    
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Tạo mới</button>
+                            <button class="btn btn-dark"><a asp-action="Index" style="color:#fff">Quay lại</a></button>
+                            
+                      
+                    </div>
+                    
+                </div>
+            </div>
+        </form>
+ 
+
+
+
+@section Scripts{
+  
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="~/Adminassets/summernote/summernote-bs4.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.Description').summernote({
+                height: 120,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+         
+        });
+    </script>
+}

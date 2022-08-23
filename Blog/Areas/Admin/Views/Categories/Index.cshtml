@@ -1,0 +1,66 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<Blog.Models.Category>
+
+
+@{
+    ViewData["Title"] = "Quản lý danh mục";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Quản lý Danh mục</h4>
+            <button type="button" class="btn btn-success">
+                <a asp-area="Admin" style="color:#fff;text-decoration:none" asp-controller="Categories" asp-action="Create">Thêm danh mục</a>
+            </button>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th> STT </th>
+                            <th> Tên Danh mục </th>
+                            <th> Ảnh đại diện </th>
+                            <th> Icon </th>
+                            <th> Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       @foreach (var category in Model)
+                       {
+                            <tr>
+                                <td> @category.CategoryId </td>
+                                <td> @category.TenDanhMuc </td>
+                                <td>
+                                    <img src="~/images/DanhMuc/@category.ImageUrl" style="width:50px" />
+                                </td>
+                                <td> @category.Icon</td>
+                                
+                                
+                                <td>
+
+                                    <button type="button" class="btn btn-primary">
+                                        <a asp-area="Admin" style="color:#fff;text-decoration:none" asp-controller="Categories" asp-action="Edit" asp-route-id="@category.CategoryId">Cập nhật</a>
+                                    </button>
+                                    <button type="button" class="btn btn-info">
+                                        <a asp-area="Admin" style="color:#fff;text-decoration:none" asp-controller="Categories" asp-action="Details" asp-route-id="@category.CategoryId">Chi tiết</a>
+                                    </button>
+                                    <button type="button" class="btn btn-danger">
+                                        <a asp-area="Admin" style="color:#fff;text-decoration:none" asp-controller="Categories" asp-action="Delete" asp-route-id="@category.CategoryId">Xóa</a>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination-area pt-5 ">
+                <ul class="pagination justify-content-center">
+                    <pager class="pager-container" list="@Model" options="@PagedListRenderOptions.Bootstrap4PageNumbersOnly" asp-area="Admin" asp-controller="Categories" asp-action="Index" />
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+               
+   

@@ -1,0 +1,44 @@
+﻿@model Blog.Models.Category
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+   <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tạo mới danh mục</h4>
+                <p class="card-description"> Danh mục </p>
+            <div class="form-group">
+                <label asp-for="TenDanhMuc" class="control-label"></label>
+                <input asp-for="TenDanhMuc" name="TenDanhMuc" class="form-control" />
+                <span asp-validation-for="TenDanhMuc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input type="file" asp-for="ImageUrl" name="Image" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Icon" class="control-label"></label>
+                <input asp-for="Icon" class="form-control" />
+                <span asp-validation-for="Icon" class="text-danger"></span>
+            </div>
+             <button type="submit" class="btn btn-primary mr-2">Tạo mới</button>
+             <button class="btn btn-dark"><a asp-action="Index" style="color:#fff">Quay lại</a></button>
+            </div>
+        </div>
+    </div>
+        </form>
+   
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

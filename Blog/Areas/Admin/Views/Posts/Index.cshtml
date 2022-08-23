@@ -1,0 +1,64 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<Blog.Models.Posts>
+
+@{
+    ViewData["Title"] = "Quản lý bài viết";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Quản lý Bài viết</h4>
+            <button type="button" class="btn btn-success">
+                <a asp-area="Admin" style="color:#fff;text-decoration:none" asp-controller="Posts" asp-action="Create">Tạo mới bài viết</a>
+            </button>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th> STT </th>
+                            <th> Tiêu đề</th>
+                            <th> Avatar </th>
+                      
+                            <th> Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var posts in Model)
+                        {
+                            <tr>
+                                <td> @posts.PostId </td>
+                                <td> @posts.NamePost </td>
+                                <td> 
+                                    <img src="~/images/post/@posts.Avatar" style="width:50px"/>
+                                </td>
+                              
+                                <td>
+
+                                    <button type="button" class="btn btn-primary">
+                                        <a asp-area="Admin" style="color:#fff;text-decoration:none" asp-controller="Posts" asp-action="Edit" asp-route-id="@posts.PostId">Cập nhật</a>
+                                    </button>
+                                    <button type="button" class="btn btn-info">
+                                        <a asp-area="Admin" style="color:#fff;text-decoration:none" asp-controller="Posts" asp-action="Details" asp-route-id="@posts.PostId">Chi tiết</a>
+                                    </button>
+                                    <button type="button" class="btn btn-danger">
+                                        <a asp-area="Admin" style="color:#fff;text-decoration:none" asp-controller="Posts" asp-action="Delete" asp-route-id="@posts.PostId">Xóa</a>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination-area pt-5 ">
+                <ul class="pagination justify-content-center">
+                    <pager class="pager-container" list="@Model" options="@PagedListRenderOptions.Bootstrap4PageNumbersOnly" asp-area="Admin" asp-controller="Posts" asp-action="Index" />
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+
+</div>
